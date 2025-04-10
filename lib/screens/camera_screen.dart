@@ -167,8 +167,39 @@ class _CameraScreenState extends State<CameraScreen> {
       return const Center(child: CircularProgressIndicator());
     }
 
-    return Column(
-      children: [Expanded(child: _buildCameraView()), _buildSneakerSelector()],
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final screenWidth = constraints.maxWidth;
+
+        if (screenWidth < 600) {
+          return Column(
+            children: [
+              Expanded(child: _buildCameraView()),
+              _buildSneakerSelector(),
+            ],
+          );
+        } else if (screenWidth < 1024) {
+          return Column(
+            children: [
+              Expanded(
+                child: Row(
+                  children: [
+                    Expanded(child: _buildCameraView()),
+                    SizedBox(width: 300, child: _buildSneakerSelector()),
+                  ],
+                ),
+              ),
+            ],
+          );
+        } else {
+          return Row(
+            children: [
+              Expanded(child: _buildCameraView()),
+              SizedBox(width: 400, child: _buildSneakerSelector()),
+            ],
+          );
+        }
+      },
     );
   }
 }
