@@ -3,6 +3,7 @@ import 'package:camera/camera.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'services/firebase_service.dart';
 import 'screens/home_screen.dart';
+import 'package:awesome_notifications/awesome_notifications.dart';
 import 'screens/camera_screen.dart';
 import 'models/sneaker.dart';
 
@@ -12,6 +13,24 @@ void main() async {
 
   final firebaseService = FirebaseService();
   await firebaseService.initializeDatabase();
+
+  AwesomeNotifications().initialize('resource://drawable/res_default_icon', [
+    NotificationChannel(
+      channelKey: 'cart_channel',
+      channelName: 'Cart Notifications',
+      channelDescription: 'Notifies when a sneaker is added to the cart',
+      defaultColor: Color(0xFF9D50DD),
+      ledColor: Colors.white,
+      importance: NotificationImportance.High,
+      soundSource: 'asset://sounds/notification_sound.mp3',
+    ),
+  ]);
+
+  AwesomeNotifications().isNotificationAllowed().then((isAllowed) {
+    if (!isAllowed) {
+      AwesomeNotifications().requestPermissionToSendNotifications();
+    }
+  });
 
   final cameras = await availableCameras();
 
@@ -53,6 +72,18 @@ class _SneakerAppHomeState extends State<SneakerAppHome> {
     setState(() {
       _cartItems.add(sneaker);
     });
+
+    AwesomeNotifications().createNotification(
+      content: NotificationContent(
+        id: 0,
+        channelKey: 'cart_channel',
+        title: 'Sneaker Added',
+        body: '${sneaker.name} has been added to your cart!',
+        notificationLayout: NotificationLayout.Default,
+        icon: 'resource://drawable/ic_notification',
+        backgroundColor: Color(0xFF9D50DD),
+      ),
+    );
   }
 
   @override
