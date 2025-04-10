@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'services/firebase_service.dart';
 import 'screens/home_screen.dart';
 import 'screens/camera_screen.dart';
 import 'models/sneaker.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+
+  final firebaseService = FirebaseService();
+  await firebaseService.initializeDatabase();
 
   final cameras = await availableCameras();
 

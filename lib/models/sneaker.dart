@@ -13,6 +13,28 @@ class Sneaker {
     required this.imageUrl,
   });
 
+  Map<String, dynamic> toMap() {
+    return {
+      'name': name,
+      'price': price,
+      'description': description,
+      'imageUrl': imageUrl,
+    };
+  }
+
+  factory Sneaker.fromMap(Map<String, dynamic> map) {
+    return Sneaker(
+      id: map['id'] ?? '',
+      name: map['name'] ?? '',
+      price:
+          map['price'] is int
+              ? (map['price'] as int).toDouble()
+              : (map['price'] ?? 0.0),
+      description: map['description'] ?? '',
+      imageUrl: map['imageUrl'] ?? '',
+    );
+  }
+
   static List<Sneaker> getSampleSneakers() {
     return [
       Sneaker(
