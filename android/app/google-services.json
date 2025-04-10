@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "385092927970",
+    "firebase_url": "https://cpd-sneakers-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "cpd-sneakers",
+    "storage_bucket": "cpd-sneakers.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:385092927970:android:95fb86f1987c99962b39bb",
+        "android_client_info": {
+          "package_name": "com.example.cpd_sneaker_mobile_application"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAncPVKpQIO6TnOS-xC2b49LLyBF9eFmN8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
